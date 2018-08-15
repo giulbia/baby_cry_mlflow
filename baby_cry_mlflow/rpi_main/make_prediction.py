@@ -6,13 +6,13 @@ import pickle
 import sys
 import warnings
 
-egg_path = '{}/../../lib/baby_cry_detection-1.1-py2.7.egg'.format(os.path.dirname(os.path.abspath(__file__)))
+egg_path = '{}/../../lib/baby_cry_mlflow-0.1-py2.7.egg'.format(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(egg_path)
 
-from baby_cry_detection.rpi_methods import Reader
-from baby_cry_detection.rpi_methods.baby_cry_predictor import BabyCryPredictor
-from baby_cry_detection.rpi_methods.feature_engineer import FeatureEngineer
-from baby_cry_detection.rpi_methods.majority_voter import MajorityVoter
+from baby_cry_mlflow.rpi_methods import Reader
+from baby_cry_mlflow.rpi_methods.baby_cry_predictor import BabyCryPredictor
+from baby_cry_mlflow.rpi_methods.feature_engineer import FeatureEngineer
+from baby_cry_mlflow.rpi_methods.majority_voter import MajorityVoter
 
 
 def main():

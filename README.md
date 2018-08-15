@@ -12,8 +12,8 @@ not. In the former case a lullaby is played, in the latter the process (recordin
 
 The code is organised as follows.
 
-- `./baby_cry_detection/pc_main` and `./baby_cry_detection/pc_methods` folders: to run on a computer, they implement the training part
-- `./baby_cry_detection/rpi_main` and `./baby_cry_detection/rpi_methods` folders: to run on a Raspberry Pi, they implement the predicting part
+- `./baby_cry_mlflow/pc_main` and `./baby_cry_mlflow/pc_methods` folders: to run on a computer, they implement the training part
+- `./baby_cry_mlflow/rpi_main` and `./baby_cry_mlflow/rpi_methods` folders: to run on a Raspberry Pi, they implement the predicting part
 
 
 ##### TRAINING
@@ -41,21 +41,21 @@ Code to run this part is included in `rpi_main` and `rpi_methods`.
 
 There is a script to test the prediction step on your computer before deployment on Raspberry Pi.
 
-A script `prediction_simulation.py` and 2 audio signals are provided in folder `./baby_cry_detection/prediction_simulation`.
+A script `prediction_simulation.py` and 2 audio signals are provided in folder `./baby_cry_mlflow/prediction_simulation`.
 
 ### Run
 
 To make it run properly, clone this repo in a folder. In the same parent folder you should also create the following
 tree structure:
 * PARENT FOLDER
-  * baby_cry_detection *this cloned repo*
+  * baby_cry_mlflow *this cloned repo*
   * output
     * dataset
     * model
     * prediction
   * recording
 
-From your command line go to baby_cry_detection folder and run the following python scripts.
+From your command line go to baby_cry_mlflow folder and run the following python scripts.
 
 ##### TRAINING
 
@@ -63,11 +63,11 @@ This step allows you to train the model. Please note that the model itself is no
 
 ```
 # Create and save trainset
-python baby_cry_detection/pc_main/train_set.py
+python baby_cry_mlflow/pc_main/train_set.py
 ```
 ```
 # Train and save model
-python baby_cry_detection/pc_main/train_model.py
+python baby_cry_mlflow/pc_main/train_model.py
 ```
 
 Script `train_set.py` saves the trainset in folder _dataset_ and, script `train_model.py` saves the model in folder
@@ -83,12 +83,12 @@ This step is to be executed on Raspberry Pi. Please refer to [baby_cry_rpi](http
 This step allows you to test the model on your computer. It uses scripts from `rpi_methods` folder.
 
 ```
-python baby_cry_detection/prediction_simulation/prediction_simulation.py
+python baby_cry_mlflow/prediction_simulation/prediction_simulation.py
 ```
 
 ### Logs
 
-Log files are created for each step, they are saved in folder `baby_cry_detection`.
+Log files are created for each step, they are saved in folder `baby_cry_mlflow`.
 
 
 

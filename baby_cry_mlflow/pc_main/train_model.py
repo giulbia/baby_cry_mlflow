@@ -8,7 +8,7 @@ import pickle
 
 import numpy as np
 
-from baby_cry_detection.pc_methods.train_classifier import TrainClassifier
+from baby_cry_mlflow.pc_methods.train_classifier import TrainClassifier
 
 
 def main():

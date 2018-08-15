@@ -2,10 +2,10 @@ from __future__ import division
 import numpy as np
 
 from tests import TestBabyCry
-from baby_cry_detection.rpi_methods import Reader
-from baby_cry_detection.rpi_methods.feature_engineer import FeatureEngineer
-from baby_cry_detection.rpi_methods.baby_cry_predictor import BabyCryPredictor
-from baby_cry_detection.rpi_methods.majority_voter import MajorityVoter
+from baby_cry_mlflow.rpi_methods import Reader
+from baby_cry_mlflow.rpi_methods.feature_engineer import FeatureEngineer
+from baby_cry_mlflow.rpi_methods.baby_cry_predictor import BabyCryPredictor
+from baby_cry_mlflow.rpi_methods.majority_voter import MajorityVoter
 
 
 class RpiMethodsTest(TestBabyCry):

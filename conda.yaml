@@ -1,4 +1,4 @@
-name: baby_cry_detection
+name: baby_cry_mlflow
 channels:
   - defaults
 dependencies:

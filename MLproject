@@ -1,7 +1,7 @@
-name: baby_cry_detection
+name: baby_cry_mlflow
 
 conda_env: conda.yaml
 
 entry_points:
   main:
-    command: "python baby_cry_detection/pc_main/train_model.py"
+    command: "python baby_cry_mlflow/pc_main/train_model.py"
