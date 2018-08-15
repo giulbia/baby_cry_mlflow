@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-import logging
-import timeit
 from librosa.feature import zero_crossing_rate, mfcc, spectral_centroid, spectral_rolloff, spectral_bandwidth,\
     chroma_cens, rmse
 
@@ -52,13 +50,7 @@ class FeatureEngineer:
                                       spectral_bandwidth_feat
                                       ), axis=0)
 
-        logging.info('Averaging...')
-        start = timeit.default_timer()
-
         mean_feat = np.mean(concat_feat, axis=1, keepdims=True).transpose()
-
-        stop = timeit.default_timer()
-        logging.info('Time taken: {0}'.format(stop - start))
 
         return mean_feat, self.label
 
@@ -72,8 +64,6 @@ class FeatureEngineer:
         """
         # # http://stackoverflow.com/questions/41896123/librosa-feature-tonnetz-ends-up-in-typeerror
         # chroma_cens_feat = chroma_cens(y=audio_data, sr=self.RATE, hop_length=self.FRAME)
-
-        logging.info('Computing {}...'.format(feat_name))
 
         if feat_name == 'zero_crossing_rate':
             return zero_crossing_rate(y=audio_data, hop_length=self.FRAME)

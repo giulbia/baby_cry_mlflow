@@ -1,6 +1,4 @@
 import librosa
-import logging
-import timeit
 
 __all__ = [
     'Reader'
@@ -27,15 +25,6 @@ class Reader:
         returned.
         * sr as int. The sample rate of the audio file [Hz]
         """
-
-        logging.info('Reading file: {0} ...'.format(self.file_name))
-
-        start = timeit.default_timer()
-
         audio_data, sr = librosa.load(self.file_name, sr=44100, mono=True, duration=5)
-
-        stop = timeit.default_timer()
-
-        logging.info('Time taken: {0}'.format(stop - start))
 
         return audio_data, sr

@@ -7,8 +7,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score, classification_report
 import numpy as np
-import logging
-import timeit
 import mlflow
 import mlflow.sklearn
 
@@ -34,15 +32,11 @@ class TrainClassifier:
         :return: pipeline, best_param, best_estimator, perf
         """
 
-        logging.info('Splitting train and test set. Test set size: 0.25%')
-
         # Split into training and test set
         X_train, X_test, y_train, y_test = train_test_split(self.X, self.y,
                                                             test_size=0.25,
                                                             random_state=0,
                                                             stratify=self.y)
-
-        logging.info('Train set size: {0}. Test set size: {1}'.format(y_train.size, y_test.size))
 
         pipeline = Pipeline([
             ('scl', StandardScaler()),
@@ -59,15 +53,9 @@ class TrainClassifier:
 
         estimator = GridSearchCV(pipeline, param_grid, cv=10, scoring='accuracy')
 
-        logging.info('Training model...')
-        start = timeit.default_timer()
-
         with mlflow.start_run():
 
             model = estimator.fit(X_train, y_train)
-
-            stop = timeit.default_timer()
-            logging.info('Time taken: {0}'.format(stop - start))
 
             y_pred = model.predict(X_test)
 
@@ -77,8 +65,6 @@ class TrainClassifier:
                     'f1': f1_score(y_test, y_pred, average='macro'),
                     # 'summary': classification_report(y_test, y_pred)
                     }
-
-            logging.info(perf)
 
             # mlflow.log_param("ciao", 1000)
             mlflow.log_metric("accuracy", accuracy_score(y_test, y_pred))
