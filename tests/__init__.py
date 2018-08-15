@@ -13,7 +13,7 @@ class TestBabyCry(TestCase):
 
         print "Set up test class"
 
-        external_directory_path = '{}/../../external_input/'.format(os.path.dirname(os.path.abspath(__file__)))
+        external_directory_path = '{}/../../recording/'.format(os.path.dirname(os.path.abspath(__file__)))
         signal_name = 'signal_9s.ogg'
 
         cls.file_name = os.path.join(os.path.normpath(external_directory_path), signal_name)

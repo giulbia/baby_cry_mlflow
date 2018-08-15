@@ -1,8 +1,8 @@
 from __future__ import division
 
 from tests import TestBabyCry
-from baby_cry_mlflow.pc_methods import Reader
-from baby_cry_mlflow.pc_methods.feature_engineer import FeatureEngineer
+from baby_cry_mlflow.utils import Reader
+from baby_cry_mlflow.utils.feature_engineer import FeatureEngineer
 
 
 class PcMethodsTest(TestBabyCry):
