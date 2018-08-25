@@ -15,15 +15,21 @@ import mlflow.sklearn
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--load_path',
-                        default='{}/../../../output/dataset/'.format(os.path.dirname(os.path.abspath(__file__))))
-    parser.add_argument('--save_path',
-                        default='{}/../../../output/model/'.format(os.path.dirname(os.path.abspath(__file__))))
+
+    parser.add_argument('output_path', type=str)
+    parser.add_argument('data_path', type=str)
+    parser.add_argument('model_path', type=str)
+    parser.add_argument('cv', type=int)
 
     # Arguments
     args = parser.parse_args()
-    load_path = os.path.normpath(args.load_path)
-    save_path = os.path.normpath(args.save_path)
+    load_path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..",
+                                              args.output_path, args.data_path))
+
+    save_path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..",
+                                              args.output_path, args.model_path))
+
+    cv = args.cv
 
     # TRAIN MODEL
 
@@ -36,25 +42,30 @@ def main():
                                                         random_state=0,
                                                         stratify=y)
 
-    pipeline = Pipeline([
-        ('scl', StandardScaler()),
-        ('clf', SVC(probability=True))
-    ])
-
-    # GridSearch
-    param_grid = [{'clf__kernel': ['linear', 'rbf'],
-                   'clf__C': [0.001, 0.01, 0.1, 1, 10, 100],
-                   'clf__gamma': np.logspace(-2, 2, 5),
-                   }]
-
-    estimator = GridSearchCV(pipeline, param_grid, cv=10, scoring='accuracy')
-
     with mlflow.start_run():
+
+        pipeline = Pipeline([
+            ('scl', StandardScaler()),
+            ('clf', SVC(probability=True))
+        ])
+
+
+
+        # GridSearch
+        param_grid = [{'clf__kernel': ['linear', 'rbf'],
+                       'clf__C': [0.001, 0.01, 0.1, 1, 10, 100],
+                       'clf__gamma': np.logspace(-2, 2, 5),
+                       }]
+
+        estimator = GridSearchCV(pipeline, param_grid, cv=cv, scoring='accuracy')
 
         model = estimator.fit(X_train, y_train)
 
         y_pred = model.predict(X_test)
 
+        mlflow.log_param("load_path", load_path)
+        mlflow.log_param("save_path", save_path)
+        mlflow.log_param("cv", cv)
         mlflow.log_metric("accuracy", accuracy_score(y_test, y_pred))
         mlflow.log_metric("recall", recall_score(y_test, y_pred, average='macro'))
         mlflow.log_metric("precision", precision_score(y_test, y_pred, average='macro'))

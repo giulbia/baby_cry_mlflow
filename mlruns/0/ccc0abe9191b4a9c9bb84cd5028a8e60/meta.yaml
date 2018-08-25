@@ -1,0 +1,13 @@
+artifact_uri: /Users/giuliabianchi/Documents/Xebia/XebiCon18/baby_cry_mlflow/mlruns/0/ccc0abe9191b4a9c9bb84cd5028a8e60/artifacts
+end_time: 1534755176096
+entry_point_name: main
+experiment_id: 0
+name: Run 0
+run_uuid: ccc0abe9191b4a9c9bb84cd5028a8e60
+source_name: /Users/giuliabianchi/Documents/Xebia/XebiCon18/baby_cry_mlflow
+source_type: 3
+source_version: c81e22830ee9d44f44e7e778e80d4591387b38e9
+start_time: 1534755165379
+status: 3
+tags: []
+user_id: giuliabianchi

@@ -3,5 +3,10 @@ name: baby_cry_mlflow
 conda_env: conda.yaml
 
 entry_points:
-  main:
-    command: "python baby_cry_mlflow/stages/train_model.py"
+    main:
+        parameters:
+            output_path: {type: string, default: "output"}
+            data_path: {type: string, default: "dataset"}
+            model_path: {type: string, default: "model"}
+            cv: {type: int, default: 10}
+        command: "python baby_cry_mlflow/stages/train_model.py {output_path} {data_path} {model_path} {cv}"
